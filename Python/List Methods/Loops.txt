@@ -1,0 +1,370 @@
+Zip() function: takes two (or more) lists as inputs and returns an object that contains a list of pairs. Each pair contains one element from each of the inputs.  
+Ex: 
+owners = ["Jenny", "Alexus", "Sam", "Grace"]
+dogs_names = ["Elphonse", "Dr. Doggy DDS", "Carter", "Ralph"]
+names_and_dogs_names = zip(owners, dogs_names)
+list_of_names_and_dogs_names = list(names_and_dogs_names)
+print(list_of_names_and_dogs_names)
+[('Jenny', 'Elphonse'), ('Alexus', 'Dr. Doggy DDS'), ('Sam', 'Carter'), ('Grace', 'Ralph')]
+
+
+
+ For loops: In a for loop, we will know in advance how many times the loop will need to iterate because we will be working on a collection with a predefined length.
+ingredients = ["milk", "sugar", "vanilla extract", "dough", "chocolate"]
+
+for ingredient in ingredients:
+  print(ingredient)
+milk
+sugar
+vanilla extract
+dough
+chocolate
+
+for <temporary variable> in <collection>:
+  <action>
+
+for item in ingredients:
+ print(item)
+
+Notice that in all of these examples the print statement is indented. Everything at the same level of indentation after the for loop declaration is included in the loop body and is run on every iteration of the loop.
+for ingredient in ingredients:
+  # Any code at this level of indentation 
+  # will run on each iteration of the loop
+  print(ingredient)
+
+Elegant loops:
+Python loves to help us write elegant code so it allows us to write simple for loops in one-line. In order to see the below example as one line, you may need to expand your narrative window. Here is the previous example in a single line: 
+for ingredient in ingredients: print(ingredient)
+
+board_games = ["Settlers of Catan", "Carcassone", "Power Grid", "Agricola", "Scrabble"]
+
+sport_games = ["football", "hockey", "baseball", "cricket"]
+
+#for game in board_games:
+  #print(game)
+for sport in sport_games:
+    print(sport)
+
+football
+hockey
+baseball
+cricket
+
+Loops with range:
+For example, if we wanted to print out a "Learning Loops!" message six times using a for loop, we would follow this structure:
+for <temporary variable> in <list of length 6>:
+  print("Learning Loops!")
+
+promise = "I will finish the python loops module!"
+for repeat in range(5):
+    print(promise)
+
+I will finish the python loops module!
+I will finish the python loops module!
+I will finish the python loops module!
+I will finish the python loops module!
+I will finish the python loops module!
+
+for temp in range(6):
+  print("Loop is on iteration number " + str(temp + 1))
+
+Would output:
+Loop is on iteration number 1
+Loop is on iteration number 2
+Loop is on iteration number 3
+Loop is on iteration number 4
+Loop is on iteration number 5
+Loop is on iteration number 6
+
+While Loops:
+A while loop performs a set of instructions as long as a given condition is true.
+The structure follows this pattern:
+while <conditional statement>:
+  <action>
+
+Let’s examine this example, where we print the integers 0 through 3:
+count = 0
+while count <= 3:
+  # Loop Body
+  print(count)
+  count += 1
+
+Let’s break the loop down:
+1.	count is initially defined with the value of 0. The conditional statement in the while loop is count <= 3, which is true at the initial iteration of the loop, so the loop body executes.
+Inside the loop body, count is printed and then incremented by 1.
+2.	When the first iteration of the loop has finished, Python returns to the top of the loop and checks the conditional again. After the first iteration, count would be equal to 1 so the conditional still evaluates to True and so the loop continues.
+3.	This continues until the count variable becomes 4. At that point, when the conditional is tested it will no longer be True and the loop will stop.
+The output would be:
+0
+1
+2
+3
+
+•	Indentation:
+Notice that in our example the code under the loop declaration is indented. Similar to a for loop, everything at the same level of indentation after the while loop declaration is run on every iteration of the loop while the condition is true.
+while count <= 3:
+  # Loop Body
+  print(count)
+  count += 1
+  # Any other code at this level of indentation will
+  # run on each iteration
+If we ever forget to indent, we’ll get an IndentationError or unexpected behavior.
+•	Elegant loops:
+Similar to for loops, Python allows us to write elegant one-line while loops. Here is our previous example in a single line:
+count = 0
+while count <= 3: print(count); count += 1
+Note: Here we separate each statement with a ; to denote a separate line of code.
+
+
+
+
+
+# While Loop Walkthrough
+count = 0
+print("Starting While Loop")
+while count <= 3:
+  # Loop Body
+  # Print if the condition is still true
+  print("Loop Iteration - count <= 3 is still true")
+  # Print the current value of count 
+  print("Count is currently " + str(count))
+  # Increment count
+  count += 1
+  print(" ----- ")
+print("While Loop ended")
+Starting While Loop
+Loop Iteration - count <= 3 is still true
+Count is currently 0
+ ----- 
+Loop Iteration - count <= 3 is still true
+Count is currently 1
+ ----- 
+Loop Iteration - count <= 3 is still true
+Count is currently 2
+ ----- 
+Loop Iteration - count <= 3 is still true
+Count is currently 3
+ ----- 
+While Loop ended
+
+
+
+
+
+
+
+
+
+
+
+countdown = 10
+while countdown >= 0: 
+  print(countdown)
+  countdown -= 1
+print("We have liftoff!")
+
+or:
+countdown = 10
+while countdown >= 0: print(countdown); countdown -= 1
+print("We have liftoff!")
+
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+We have liftoff!
+
+A while loop isn’t only good for counting! Similar to how we saw for loops working with lists, we can use while loops to iterate through a list as well.
+Let’s return to our ingredient list:
+ingredients = ["milk", "sugar", "vanilla extract", "dough", "chocolate"]
+We know that while loops require some form of a variable to track the condition of the loop to start and stop.
+Take some time to think about what we would use to track whether we need to start/stop the loop if we want to iterate through ingredients and print every element.
+Click here to find out!
+
+We know that a list has a predetermined length. If we use the length of the list as the basis for how long our while loop needs to run, we can iterate the exact length of the list.
+
+
+We can use the built-in Python len() function to accomplish this:
+# Length would be equal to 5
+length = len(ingredients)
+
+
+We can then use this length in addition to another variable to construct the while loop:
+length = len(ingredients)
+index = 0
+ 
+while index < length:
+  print(ingredients[index])
+  index += 1
+Let’s break this down:
+# Length will be 5 in this case
+length = len(ingredients)
+Explanation
+
+As mentioned, we need a way to know how many times we need our loop to iterate based on the size of the collection.
+
+This comes in the form of our length variable which stores the value of the length of the list.
+
+
+# Index starts at zero
+index = 0
+Explanation
+
+We still need an additional variable that will be used to compare against our length.
+
+
+while index < length:
+Explanation
+
+In our while loop conditional, we will compare the index variable to the length of our list stored inside of the length variable.
+
+
+On the first iteration, we will be comparing the equivalent of 0 < 5 which will evaluate to True, and start the execution of our loop body.
+
+
+# The first iteration will print ingredients[0]
+print(ingredients[index])
+Explanation
+ 
+Inside of our loop body, we can use the index variable to access our ingredients list and print the value at the current iteration.
+
+Since our index starts at zero, our first iteration will print the value of the element at the zeroth index of our ingredients list, then the next iteration will print the value of the element at the first index, and so on.
+
+
+# Increment index to access the next element in ingredients
+# Each iteration gets closer to making the conditional no longer true
+index += 1
+Explanation
+ 
+On each iteration of our while loop, we need to also increment the value of index to make sure our loop can stop once the index value is no longer smaller than the length value.
+
+This increment also helps us access the next value of the ingredients list on the next iteration.
+
+
+Our final output would be:
+milk
+sugar
+vanilla extract
+dough
+chocolate
+
+python_topics = ["variables", "control flow", "loops", "modules", "classes"]
+#Your code below: 
+length = len(python_topics)
+index = 0
+while index < length:
+  print("I am learning about" + python_topics[index])
+  index += 1
+
+
+I am learning aboutvariables
+I am learning aboutcontrol flow
+I am learning aboutloops
+I am learning aboutmodules
+I am learning aboutclasses
+
+Loop Control: Break
+Take the following list items_on_sale as our example:
+items_on_sale = ["blue shirt", "striped socks", "knit dress", "red headband", "dinosaur onesie"]
+It’s often the case that we want to search a list to check if a specific value exists. What does our loop look like if we want to search for the value of "knit dress" and print out "Found it" if it did exist?
+It would look something like this:
+for item in items_on_sale:
+  if item == "knit dress":
+    print("Found it")
+This code goes through each item in items_on_sale and checks for a match. This is all fine and dandy but what’s the downside?
+Once "knit_dress" is found in the list items_on_sale, we don’t need to go through the rest of the items_on_sale list. Unfortunately, our loop will keep running until we reach the end of the list.
+Since it’s only 5 elements long, iterating through the entire list is not a big deal in this case but what if items_on_sale had 1000 items? What if it had 100,000 items? This would be a huge waste of time for our program!
+Thankfully you can stop iteration from inside the loop by using break loop control statement.
+When the program hits a break statement it immediately terminates a loop. For example:
+items_on_sale = ["blue shirt", "striped socks", "knit dress", "red headband", "dinosaur onesie"]
+ 
+print("Checking the sale list!")
+ 
+for item in items_on_sale:
+  print(item)
+  if item == "knit dress":
+    break
+ 
+print("End of search!")
+This would produce the output:
+Checking the sale list!
+blue shirt
+striped socks
+knit dress
+End of search!
+
+Ex: 
+dog_breeds_available_for_adoption = ["french_bulldog", "dalmatian", "shihtzu", "poodle", "collie"]
+dog_breed_I_want = "dalmatian"
+for dog_breed in dog_breeds_available_for_adoption:
+  print(dog_breed)
+  if dog_breed == dog_breed_I_want:
+    break
+print("They have the dog I want!")
+
+Output:
+french_bulldog
+dalmatian
+They have the dog I want!
+
+Loop Control: Continue
+ages = [12, 38, 34, 26, 21, 19, 67, 41, 17]
+for age in ages:
+  if age < 21:
+    continue
+  print(age)
+
+Output:
+
+38
+34
+26
+21
+67
+41
+
+Nested Loops:
+roject_teams = [["Ava", "Samantha", "James"], ["Lucille", "Zed"], ["Edgar", "Gabriel"]]
+Using a for or while loop can be useful here to get each team:
+for team in project_teams:
+  print(team)
+Would output:
+["Ava", "Samantha", "James"]
+["Lucille", "Zed"]
+["Edgar", "Gabriel"]
+But what if we wanted to print each individual student? In this case, we would actually need to nest our loops to be able to loop through each sub-list. Here is what it would look like:
+# Loop through each sublist
+for team in project_teams:
+  # Loop elements in each sublist
+  for student in team:
+    print(student)
+This would output:
+Ava
+Samantha
+James
+Lucille
+Zed
+Edgar
+Gabriel
+
+
+sales_data = [[12, 17, 22], [2, 10, 3], [5, 12, 13]]
+scoops_sold = 0
+for location in sales_data:
+  print(location)
+  for scoops in location:
+    scoops_sold += scoops
+print(scoops_sold)
+
+Output:
+[12, 17, 22]
+[2, 10, 3]
+[5, 12, 13]
+96
