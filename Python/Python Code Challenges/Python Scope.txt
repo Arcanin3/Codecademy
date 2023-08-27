@@ -1,0 +1,67 @@
+Python Scope
+When writing programs in Python, often we will define data (usually in the form of variables) to accomplish a task. Once the program is read by Python, it will follow a distinct order to assess if a piece of data is accessible or not. The scope of our data is the level at which it can be accessed.
+By exploring the concept of scope, we will gain a better understanding of how our data can be accessed throughout our entire program but in particular when working with functions.
+Local Scope
+When working with functions, we will often find that where we define our data will determine its scope. If we define a variable inside of a function then it is known as a local variable — a variable defined in a local scope. We can think of it being locally defined to only accessible inside the function.
+Here is what a local variable might look like inside of a program:
+def welcome_user(name):
+    greeting = "Hello " + name + "!"
+    print(greeting)
+
+welcome_user("User")
+
+Would output:
+Hello User!
+
+The local variable in this example is greeting. This is a variable that is created inside of the function welcome_user() and thus only has scope locally within that function.
+Local variables from one function cannot be accessed outside of that function. Take a look at a modified version of the last example:
+def welcome_user(name):
+    greeting = "Hello " + name + "!"
+ 
+print(greeting)
+
+welcome_user("User")
+
+If we run this program, it will end up throwing a NameError:
+File "script.py", line 4
+  print(greeting)
+NameError: name 'greeting' is not defined
+This is because we tried to access greeting outside of the function where it is not accessible. The scope of greeting is only within the function welcome_user().
+Global Scope
+Some variables are accessible anywhere in a script. These types of variables are referred to as global variables and share what is known as the global scope. Global variables are typically defined outside of all of the functions in the script and store data we want to use throughout the entire program.
+Let’s look at an example where global variables are used:
+balance = 12.55
+name = "Lilia"
+ 
+def withdraw_money(amount):
+    result = balance - amount
+    print("Hello " + name + " your balance remaining is: $" + str(result))
+    return amount
+ 
+withdraw_money(2)
+print("Save your money " + name + "!")
+
+In this code, balance and name are both global variables. The function withdraw_money() is able to access them and they can also be accessed outside of the function in the final print() statement.
+The output would be:
+Hello Lilia your balance remaining is: $10.55
+Save your money Lilia!
+
+Scope and Nested Functions
+Nested functions provide a great example of how scope is determined in our program. Typically, the order of scope follows the pattern where inner functions are able to access outer function variables, but outer functions are not able to access inner function variables. Here is what that looks like in code:
+def outer_func():
+    location = "Inside the outer function!"
+
+    def inner_func():
+        location = "Inside the inner function!"
+        print(location)
+
+    inner_func()
+
+    print(location)
+
+outer_func()
+
+In this example, we use location as the variable name for two local variables. Each instance of location has a different scope, so when the functions are called, Python uses the closest available scope for the variable definition. Because of this, when we call outer_func() we do not overwrite the value of location and both of the strings are printed.
+Here is what the output looks like:
+Inside the inner function!
+Inside the outer function!
