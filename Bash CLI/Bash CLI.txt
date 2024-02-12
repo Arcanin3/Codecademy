@@ -1,0 +1,219 @@
+Bash CLI
+
+Bash, or the __B__ourne-__A__gain __SH__ell, is a CLI that was created in 1989 by Brian Fox as a free software replacement for the Bourne Shell. A shell is a specific kind of CLI. Bash is “open source,” which means that anyone can read the code and suggest changes. Since its beginning, it has been supported by a large community of engineers who have worked to make it an incredible tool.
+
+Filesystem
+A filesystem organizes a computer’s files and directories into a tree structure:
+
+The first directory in the filesystem is the root directory. It is the parent of all other directories and files in the filesystem.
+Each parent directory can contain more child directories and files. In the filesystem on the right, blog/ is the parent of 2014/, 2015/, and hardware.txt.
+Each directory can contain more files and child directories. The parent-child relationship continues as long as directories and files are nested.
+
+ls
+The first command we’re going to look at is ls. A command is a directive to the computer to perform a specific task. When you type ls, the command line looks at the directory you are in, and then “lists” all the files and directories inside of it. Be sure to type the letter l as in “List” and not the number 1.
+
+In the terminal, the first thing you see is $. This is called a shell prompt. It appears when the terminal is ready to accept a command.
+
+If we typed:
+
+$ ls
+
+the terminal would display our current directory’s files and directories:
+
+2014  2015  hardware.txt
+
+The directories 2014/, 2015/, and the file hardware.txt are the contents of the current directory.
+
+To start, after the $ in the terminal, type:
+
+ls 
+
+and press enter.
+
+You should see the three items print out below the command.
+---------------------------------------------------------------------------
+
+
+pwd
+The next command we’re going to look at is pwd, which stands for “print working directory.” It outputs the name of the directory you are currently in, called the working directory.
+
+Here the working directory is blog/. In Codecademy courses, your working directory is usually inside the /home/ccuser/workspace/ directory.
+
+Together with ls, the pwd command is useful to show where you are in the filesystem.
+
+----------------------------------------------
+
+cd I
+Our next command is cd, which stands for “change directory.” Just as you would click on a folder in Windows Explorer or Finder, cd switches you into the directory you specify. In other words, cd changes the working directory.
+
+Let’s say the directory we change into is 2015/:
+
+$ cd 2015
+
+When a file, directory, or program is passed into a command, it is called an argument. Here the 2015/ directory is an argument for the cd command.
+
+The cd command takes a directory name as an argument and switches into that directory.
+
+It is also important to move up one directory. For this, we use:
+
+$ cd ..
+
+The argument .. stands for the directory above the current working directory. Assuming we are in /home/ccuser/workspace/blog/2015:
+
+$ pwd
+/home/ccuser/workspace/blog/2015
+$ cd ..
+$ pwd
+/home/ccuser/workspace/blog
+
+The above example uses the command cd .. to navigate up to the /home/ccuser/workspace/blog/ directory.
+
+--------------------------------------------------------------
+
+cd II
+In the previous exercise, we used cd multiple times to go from the blog/ directory to the memory/ directory. You can reference the file system here.
+
+To move across multiple directories with a single command, we can provide cd a relative path to the memory/ directory as an argument. From the blog/ directory use:
+
+$ cd 2015/jan/memory
+
+The relative path is a forward slash (/) separated list of all the directories leading to the goal directory. In the above example, we navigate directly to memory/ from blog/ using cd with the relative path 2015/jan/memory.
+
+We can also move up multiple directories using the .. argument. To go from memory up 2 directories to 2015, we use `../..:
+
+$ pwd
+/home/ccuser/workspace/blog/2015/jan/memory
+$ cd ../..
+$ pwd
+/home/ccuser/workspace/blog/2015
+
+The relative path ../.. can be read: the directory above and the directory above that.
+
+Lastly, we can move to an adjacent directory using .. and then a directory name. If we are in the 2015/ directory and we want to go into the 2014/ directory, we go up one directory then into the 2014/ directory:
+
+$ ls
+2014  2015  hardware.txt
+$ cd 2015
+$ pwd
+/home/ccuser/workspace/blog/2015
+$ cd ../2014
+$ pwd
+/home/ccuser/workspace/blog/2014
+
+The relative path is the directory above 2015/ (which is blog/) and then the 2014/.
+
+To get to the feb/ directory from blog/2015/ use:
+
+cd feb
+
+To move upwards in the filesystem we use cd .., and to move downwards we use cd next-directory. We combine directions using a / like so if we want to end up in the jan folder:
+
+cd ../jan
+
+To navigate a level up in the filesystem we use cd .. and to combine directions, we use a /. So to navigate up two levels we would use:
+
+cd ../..
+----------------------------------------------------------------------------------------------
+
+mkdir
+Now that we can traverse the existing filesystem, let’s try editing it by making directories (folders) through the command line. The command for that is mkdir:
+
+$ mkdir media
+
+The mkdir command stands for “make directory”. It takes in a directory name as an argument and then creates a new directory in the current working directory.
+
+Here we used mkdir to create a new directory named media/ inside our working directory.
+
+1.
+Navigate to the /home/ccuser/workspace/blog/2014/dec/ directory.
+
+Then list all files and directories in the working directory to see what’s currently in there.
+
+You can use cd 2014/dec to move into the 2014/dec directory. Remember to use ls to list the contents of your current directory.
+
+2.
+Create a new directory named media. If you list the contents of the working directory again, you should see your new directory.
+
+From the dec/ directory this requires the following commands:
+
+mkdir media
+
+3.Within our new media/ directory, create another directory named tv/.
+
+You may use either of the two approaches:
+
+use mkdir from our current position by using the relative path media/tv as an argument
+Or
+
+cd into media/ and then use mkdir (without a relative path)
+
+From the dec/ directory this requires the following commands:
+
+cd media
+mkdir tv
+
+------------------------------------------------------------------------------------
+
+touch
+Now we know how to create directories through the command line, but how do we create new files?
+
+We can do this using the command touch:
+
+$ touch keyboard.txt
+
+The touch command creates a new file inside the working directory. It takes in a filename as an argument and then creates an empty file with that name in the current working directory.
+
+Here we used touch to create a new file named keyboard.txt.
+
+1.
+Make sure you are in the /home/ccuser/workspace/blog/ directory. List your working directory’s current contents.
+
+To navigate into the blog directory and list the contents run these commands:
+
+cd /home/ccuser/workspace/blog
+ls
+
+
+2.
+Create a new file named keyboard.txt inside the working directory. If you list its contents again, you should now see your file listed.
+
+Use:
+
+$ touch keyboard.txt
+
+to create the new file.
+
+-----------------------------------------------------------------------------------
+
+Helper Commands
+Now that we’ve covered the basics of navigating your filesystem from the command line, let’s look at some helpful commands that will make using it easier!
+
+tab can be used to autocomplete your command. When you are typing the name of an existing file or directory, you can use tab to finish the rest of the name.
+
+The up and down arrows (↑ and ↓) can be used to cycle through your previous commands. ↑ will take you up through your most recent commands, and ↓ will take you back through to the most recent one.
+
+clear is used to clear your terminal, which is useful when it’s full of previous commands and outputs. It doesn’t change or undo your previous commands, it just clears them from view. As mentioned above, you can use the up and down arrow keys to review your command history anytime.
+
+Experiment with the helper commands! Some things you could try are:
+
+When your working directory is home/ccuser/workspace/blog, type cd 2 and then use tab - it should autocomplete upto cd 201. This is because both possible directories (2014 and 2015) start with 201.
+Use ls to see what contents are in your working directory. Then use cd with the first letter of one of the files or directories and use tab to autocomplete.
+Use the up and down arrows to cycle through your previous commands.
+Use clear to clear your previous commands and output from the terminal.
+
+-----------------------------------------------------------------------------------------------------------
+
+Review
+
+The command line is a text interface for the computer’s operating system. To access the command line, we use the terminal.
+A filesystem organizes a computer’s files and directories into a tree structure. It starts with the root directory. Each parent directory can contain more child directories and files.
+From the command line, you can navigate through files and folders on your computer:
+pwd outputs the name of the current working directory.
+ls lists all files and directories in the working directory.
+cd switches you into the directory you specify.
+mkdir creates a new directory in the working directory.
+touch creates a new file inside the working directory.
+You can use helper commands to make navigation easier:
+clear clears the terminal
+tab autocompletes the name of a file or directory
+↑ and ↓ allow you to cycle through previous commands
