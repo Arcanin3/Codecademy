@@ -1,0 +1,91 @@
+SNAPFIT ROBOTS PRODUCT DISCLAIMER
+
+Your Snapfit Robot Model i075 is provided with guarantee of limited 1-year warranty only. Outside of maintenance and malfunction descriptions covered in the warranty, customer shall make no claims of any kind, either express or implied, including but not limited to warranties of sellability, fitness for specific usage, of title, or of noninfringement of third and fourth party rights, and/or rights to attend robot parties. Use of the product by uninformed user is at the user’s risk.
+
+1.
+Initialize a new Git project.
+
+	git init
+
+2.
+Check the status of the Git project.
+
+You will see multiple files listed in the output as “Untracked”.
+
+git status
+On branch master
+
+Initial commit
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        disclaimer.txt
+        instructions.txt
+        warranty.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+3.
+Add each file to the Git staging area.
+
+git add disclaimer.txt instructions.txt warranty.txt
+
+4.
+Check the status of the Git project again.
+
+git status
+On branch master
+
+Initial commit
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+        new file:   disclaimer.txt
+        new file:   instructions.txt
+        new file:   warranty.txt
+
+5.
+Make a commit.
+
+git commit -m "Added 3 new files"
+[master (root-commit) 0367566] Added 3 new files
+ 3 files changed, 70 insertions(+)
+ create mode 100644 disclaimer.txt
+ create mode 100644 instructions.txt
+ create mode 100644 warranty.txt
+
+6.
+View your Git commit log.
+
+If your cursor is stuck in Git log mode, press “q” on your keyboard to escape.
+
+git log
+commit 036756678f306f2ef34c785d91669901fa10f1c4
+Author: codecademy <ccuser@codecademy.com>
+Date:   Tue May 21 20:01:57 2024 +0000
+
+    Added 3 new files
+
+7.
+Add the file to the staging area.
+
+git add disclaimer.txt
+
+8. Now make a commit
+git commit -m "Changed disclaimer"
+
+9. View your Git commit log again to identify your commit.
+git log
+commit a3d4ef28c7c3c6acf90a30d675088d1388851814
+Author: codecademy <ccuser@codecademy.com>
+Date:   Tue May 21 20:12:26 2024 +0000
+
+    Changed disclaimer
+
+commit 036756678f306f2ef34c785d91669901fa10f1c4
+Author: codecademy <ccuser@codecademy.com>
+Date:   Tue May 21 20:01:57 2024 +0000
+
+    Added 3 new files
