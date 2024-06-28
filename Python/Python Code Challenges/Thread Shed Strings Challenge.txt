@@ -129,7 +129,7 @@ If we want to split up daily_sales into a list of individual transactions, we ar
 Replace all the instances of ;,; in daily_sales with some other character and save the result to daily_sales_replaced.
 
 Action:
-daily_sales_replaced = daily_sales.replace(";,;" , ";")
+daily_sales_replaced = daily_sales.replace(";,;" , "+")
 
 3.
 Now we can split the string into a list of each individual transaction.
