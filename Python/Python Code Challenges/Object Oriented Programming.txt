@@ -1,0 +1,346 @@
+Object-Oriented Programming
+
+Creating a Dog Class
+We can represent real-life objects using Python - let’s give it a try! We’ll build a Dog class while you create your own pet.
+
+Attributes: What a Dog Is
+Let’s start by reminding ourselves of the attributes of a dog. These are the adjectives and nouns associated with a dog.
+
+Dogs might have simple attributes like a:
+
+Name (e.g. “Sparky”)
+Breed (e.g. “Golden Retriever”)
+Age (e.g. 5)
+Dogs might also have things that are true about them:
+
+Is our dog friendly? (e.g. True)
+Let’s start by adding these simple attributes and one true/false attribute to our Dog class. We’ll create the class Dog and create an __init__ method. This method, which we call the constructor, defines who our dog will be when first created!
+
+class Dog:
+  # To create a Dog, give it a name, breed, and age. age is in years. 
+  # If you don't give an age, we'll say it's 0 years old (a puppy).
+  # All dogs also start as friendly!
+  def __init__(self, input_name, input_breed, input_age = 0, input_friendliness = True):
+    # self.name is this specific dog's name
+    self.name = input_name
+    self.breed = input_breed
+    self.age = input_age
+    self.is_friendly = input_friendliness
+
+self will refer to a specific dog that we create. self.age refers to that specific dog’s age.
+
+We can create a new dog by calling our constructor. Notice, we call it by saying Dog(...), not __init__. In this example, dog_one will be a Dog named “Sparky”, who is a 5-year-old “Golden Retriever”. This dog is automatically friendly.
+
+dog_one = Dog("Sparky", "Golden Retriever", 5)
+
+We can also update our code to add a second Dog: a 10-year old, unfriendly “Chihuahua” named “Bruno”.
+
+dog_one = Dog("Sparky", "Golden Retriever", 5)
+
+# This dog will have self.is_friendly set to False
+dog_two = Dog("Bruno", "Chihuahua", 10, False)
+
+We’ve created two instances of our Dog class. An instance is a single occurrence of an object. In this example, we have two occurrences, aka instances, of Dog. They’re both Dogs, but their attributes are specific to each of them.
+
+Create an __init__ constructor method for a pet of your choice!
+
+Try creating a Cat, Turtle, or other pet.
+Give it at least three attributes.
+Add one true/false attribute.
+Create your new pet by calling the constructor!
+
+# Create your class here
+class Cat:
+  # Create a __init__ method
+  def __init__(self, input_name, input_breed, input_age = 0, input_friendliness = True):
+    self.name = input_name
+    self.breed = input_breed
+    self.age = input_age
+    self.friendliness = input_friendliness
+# Create a new pet!
+cat_one = Cat('Boots', 'Scottish Fold', 9, True)
+
+------------
+
+Methods: What a Dog Can Do
+Let’s now think about a Dog‘s methods. What can a Dog do? Usually, these methods will be related to at least one of your attributes.
+
+Dogs might do things like:
+
+Have a Birthday
+Bark
+Walk
+Make a Friend
+These actions might change some of the attributes we already gave our Dog or necessitate that we add new attributes. Let’s first update our dog to be able to have a birthday. We’ll create a have_birthday method inside of our Dog class.
+
+Methods: What a Dog Can Do
+Let’s now think about a Dog‘s methods. What can a Dog do? Usually, these methods will be related to at least one of your attributes.
+
+Dogs might do things like:
+
+Have a Birthday
+Bark
+Walk
+Make a Friend
+These actions might change some of the attributes we already gave our Dog or necessitate that we add new attributes. Let’s first update our dog to be able to have a birthday. We’ll create a have_birthday method inside of our Dog class.
+
+class Dog:
+  def __init__(self, input_name, input_breed, input_age = 0, input_friendliness = True):
+    # Dog attributes...
+    self.name = input_name
+    self.age = input_age
+    # Other attributes would be listed below...
+
+  # The self parameter refers to the specific
+  # dog we're attaching this method to.
+  def have_birthday(self):
+    #  Add one to this specific dog's age.
+    self.age = self.age + 1
+    # Print out the change we made.
+    print("{name} had a birthday! {name} is {age} years old.".format(name = self.name, age = self.age))
+
+Remember, self refers to a specific instance of a dog. self.age refers to that specific dog’s age. Using self as a parameter means that the method will be referring to the specific dog we attach the method to.
+
+Now, we will tell this specific dog (dog_one) that it had a birthday.
+
+dog_one = Dog("Sparky", "Golden Retriever", 5)
+
+# The self parameter will see that self = dog_one
+dog_one.have_birthday()
+# Output: "Sparky had a birthday! Sparky is 6 years old."
+
+Using the code from your old pet, or create a new pet, let’s add a method that changes one of your pet’s attributes.
+
+Use the Cat class or change the class.
+Add a method that changes one of your pet’s attributes.
+Inside the method, print out that the attribute changed.
+Attach the method to your new pet so we can change that specific pet’s attribute.
+
+class Cat:
+  def __init__(self, input_name, input_breed, input_age = 0):
+    self.name = input_name
+    self.breed = input_breed
+    self.age = input_age
+    self.is_cuddly = True
+
+  def have_birthday(self):
+    self.age = self.age + 1
+    print("{name} had a birthday! {name} is {age} years old.".format(name = self.name, age = self.age))
+
+new_cat = Cat("Leo", "Tabby", 3)
+
+new_cat.have_birthday()
+
+----------------
+Let’s add something more complicated to our Dog. Let’s give our dogs the ability to become_friends with another dog. One dog will try to become friends with another dog, BUT they will only be able to become friends if the other dog is friendly.
+
+We’ll need to add an array of friends to our Dog constructor. This array will start out empty.
+
+class Dog:
+  def __init__(self, input_name, input_breed, input_age = 0, input_friendliness = True):
+    self.name = input_name
+    self.breed = input_breed
+    self.age = input_age
+    self.is_friendly = input_friendliness
+    self.friends = []
+
+Next, we’ll need to add a method that:
+
+Takes in another Dog as an argument
+Checks if the other dog is friendly
+If the other dog is friendly, becomes friends with the other dog
+
+class Dog:
+  def __init__(self, input_name, input_breed, input_age = 0, input_friendliness=True):
+    # Other Dog attributes...
+    self.friends = []
+
+  # self will equal this specific dog
+  # other_dog will be an argument we pass in
+  def become_friends(self, other_dog):
+    if(other_dog.is_friendly):
+      # If the other dog is friendly,
+      # it adds other_dog to its friends
+      self.friends.append(other_dog)
+      # The other dog also adds this 
+      # specific dog to its friends
+      other_dog.friends.append(self)
+      print("{name} become friends with {other_name}!".format(name = self.name, other_name = other_dog.name))
+    else:
+      # If the other dog is NOT friendly,
+      # no one becomes friends.
+      print("{other_name} did not want to become friends with {name}!".format(name = self.name, other_name = other_dog.name))
+
+Next, we’ll revisit our two _instance_s of our Dog class. In this example, we need two Dogs so they can become friends! First, let’s see if “Sparky”, who is friendly, can become friends with “Bruno” who is NOT friendly.
+
+dog_one = Dog("Sparky", "Golden Retriever", 5)
+dog_two = Dog("Bruno", "Chihuahua", 10, False)
+
+# When Sparky asks Bruno, Bruno says no.
+dog_one.become_friends(dog_two)
+# Output: "Bruno did not want to become friends with Sparky!"
+
+Since “Bruno” is not friendly, Bruno doesn’t want to be friends! But wait, what if Bruno initiates the friendship? If Bruno asks Sparky, Sparky will accept the friendship because Sparky IS friendly.
+
+dog_one = Dog("Sparky", "Golden Retriever", 5)
+dog_two = Dog("Bruno", "Chihuahua", 10, False)
+
+# When Bruno asks Sparky, Sparky says yes!
+dog_two.become_friends(dog_one)
+# Output: "Bruno became friends with Sparky!"
+
+Using the code from your old pet, or create a new pet, let’s add a method that changes one of your pet’s attributes.
+
+Use the Cat class or change the class.
+Create at least two instances of your class.
+Add a method that has the two pets interact with each other. This will likely have the format pet_one.method_name(pet_two).
+Inside the method, print out what has changed.
+Call the method by attaching it to one of the pets.
+
+class Cat:
+  def __init__(self, input_name, input_breed, input_age = 0, input_is_brave = False):
+    self.name = input_name
+    self.breed = input_breed
+    self.age = input_age
+    # Added is_brave
+    self.is_brave = input_is_brave
+    self.is_cuddly = True
+     
+  # if the other cat is NOT
+  # brave, they will be 
+  # scared
+  def scare(self, other_cat):
+    if(other_cat.is_brave):
+      print("{other_name} was NOT scared of {name}!".format(name = self.name, other_name = other_cat.name))
+    else:
+      print("{other_name} was scared by {name}!".format(name = self.name, other_name = other_cat.name))
+
+# Create two pets.
+cat_one = Cat("Leo", "Tabby", 3, True)
+cat_two = Cat("Rashid", "Bengal", 6, False)
+
+# Rashid is NOT brave and will 
+# be scared
+cat_one.scare(cat_two)
+
+# Leo is brave and will 
+# NOT be scared
+cat_two.scare(cat_one)
+
+--------------------
+Describing Our Classes
+Sometimes, we may want to see a description of a specific instance of our Dog class. Maybe we want “Bruno” to tell us all of its attributes. To do that, we need to add a __repr__() method. A __repr__() method will print out all of an Object’s attributes in a readable way.
+
+```python
+class Dog:
+  def __init__(self, input_name, input_breed, input_age = 0, input_friendliness=True):
+    self.name = input_name
+    self.breed = input_breed
+    self.age = input_age
+    self.is_friendly = input_friendliness
+    self.friends = []
+
+  def __repr__(self):
+    # Printing a Dog will tell you its name, its breed, its age, if it's friendly, and how many friends it has.
+    description = "This {breed} named {name} is {age} years old and has {number_of_friends} friends.".format(breed = self.breed, name = self.name, age=self.age, number_of_friends=len(self.friends))
+    if self.is_friendly:
+      description += " {name} is a friendly dog.".format(name = self.name)
+    else:
+      description += " {name} is an unfriendly dog.".format(name = self.name)
+    return description
+
+After adding this method to our class, let’s try printing out information about our dogs.
+
+dog_one = Dog("Sparky", "Golden Retriever", 5)
+dog_two = Dog("Bruno", "Chihuahua", 10, False)
+
+print(dog_one)
+# Output: "This Golden Retriever named Sparky is 5 years old and has 0 friends. Sparky is a friendly dog."
+print(dog_two)
+# Output: "This Chihuahua named Bruno is 10 years old and has 0 friends. Bruno is an unfriendly dog."
+
+If the dogs become friends, then what is printed will be slightly different!
+
+dog_two.become_friends(dog_one)
+
+print(dog_two)
+# Output: "This Chihuahua named Bruno is 10 years old and has 1 friends. Bruno is an unfriendly dog."
+
+Notice how it said Bruno has “1 friends”? It should say “1 friend”. How would you fix that in your code?
+
+let’s add a __repr__() method that will print out a description of our pet.
+
+Use the Cat class or change the class.
+Create a __repr__() method that prints information about ALL of your pet’s attributes.
+Create at least one instance of your pet.
+print() the instance of your pet.
+
+class Cat:
+  def __init__(self, input_name, input_breed, input_age = 0):
+    self.name = input_name
+    self.breed = input_breed
+    self.age = input_age
+    self.is_cuddly = True
+  
+  # Create a __repr__ method
+  def __repr__(self):
+    # Printing a Cat will
+    # tell you its name, its
+    # breed, its age, and
+    # if it's cuddly.
+    description = "This {breed} named {name} is {age} years old.".format(breed = self.breed, name = self.name, age=self.age)
+    if self.is_cuddly:
+      description += " {name} is a cuddly cat.".format(name = self.name)
+    else:
+      description += " {name} is not a cuddly cat.".format(name = self.name)
+    return description
+
+# Create your pet.
+cat_one = Cat("Leo", "Tabby", 3)
+
+# Print out your pet below!
+print(cat_one)
+
+-----------------
+
+Summary
+Our final Dog class:
+
+class Dog:
+  def __init__(self, input_name, input_breed, input_age = 0, input_friendliness=True):
+    self.name = input_name
+    self.breed = input_breed
+    self.age = input_age
+    self.is_friendly = input_friendliness
+    self.friends = []
+
+  def __repr__(self):
+    description = "This {breed} named {name} is {age} years old and has {number_of_friends} friends.".format(breed = self.breed, name = self.name, age=self.age, number_of_friends=len(self.friends))
+    if self.is_friendly:
+      description += " {name} is a friendly dog.".format(name = self.name)
+    else:
+      description += " {name} is an unfriendly dog.".format(name = self.name)
+    return description
+
+  def have_birthday(self):
+    self.age = self.age + 1
+    print("{name} had a birthday! {name} is {age} years old.".format(name = self.name, age = self.age))
+
+  def become_friends(self, other_dog):
+    if(other_dog.is_friendly):
+      self.friends.append(other_dog)
+      other_dog.friends.append(self)
+      print("{name} become friends with {other_name}!".format(name = self.name, other_name = other_dog.name))
+    else:
+      print("{other_name} did not want to become friends with {name}!".format(name = self.name, other_name = other_dog.name))
+
+dog_one = Dog("Sparky", "Golden Retriever", 5)
+dog_two = Dog("Bruno", "Chihuahua", 10, False)
+
+dog_one.have_birthday()
+dog_two.become_friends(dog_one)
+
+What are some other things we could do with our Dog class?
+
+A Dog can bark(). This also doesn’t really relate to any attribute. Perhaps we want all dogs to bark in the same exact way. Or maybe we could add a size variable and when a dog uses it’s bark() method, that method does something different depending on the dog’s size.
+A Dog can walk(). This would probably update a position attribute. As you can see, thinking of a Class’ methods can sometimes inform what attributes should exist.
