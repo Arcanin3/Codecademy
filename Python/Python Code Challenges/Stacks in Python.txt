@@ -1,0 +1,339 @@
+Stacks: Conceptual
+
+Introduction
+A stack is a data structure which contains an ordered set of data.
+
+Stacks provide three methods for interaction:
+
+Push - adds data to the “top” of the stack
+Pop - returns and removes data from the “top” of the stack
+Peek - returns data from the “top” of the stack without removing it
+
+Stacks mimic a physical “stack” of objects. Consider a set of gym weights:
+
+Each plate has a weight (the data). The first plate you add, or push, onto the floor is both the bottom and top of the stack. Each weight added becomes the new top of the stack.
+
+At any point, the only weight you can remove, or pop, from the stack is the top one. You can peek and read the top weight without removing it from the stack.
+
+The last plate that you put down becomes the first, and only, one that you can access. This is a Last In, First Out or LIFO structure. A less frequently used term is First In, Last Out, or FILO.
+
+Implementation
+Stacks can be implemented using a linked list as the underlying data structure because it’s more efficient than a list or array.
+
+Depending on the implementation, the top of the stack is equivalent to the head node of a linked list and the bottom of the stack is equivalent to the tail node.
+
+A constraint that may be placed on a stack is its size. This is done to limit and quantify the resources the data structure will take up when it is “full.”
+
+Attempting to push data onto an already full stack will result in a stack overflow. Similarly, if you attempt to pop data from an empty stack, it will result in a stack underflow.
+
+Review
+Let’s take a minute to review what we’ve covered about stacks in this lesson.
+
+Stacks:
+
+Contain data nodes
+Support three main operations
+Push adds data to the top of the stack
+Pop removes and provides data from the top of the stack
+Peek reveals data on the top of the stack
+Implementations include a linked list or array
+Can have a limited size
+Pushing data onto a full stack results in a stack overflow
+Stacks process data Last In, First Out (LIFO)
+
+----------------------------------------------------
+
+Stacks Python Introduction
+
+There are three main methods that we want our stacks to have:
+
+Push - adds data to the “top” of the stack
+Pop - provides and removes data from the “top” of the stack
+Peek - provides data from the “top” of the stack without removing it
+We also need to consider the stack’s size and tweak our methods a bit so that our stack does not “overflow”.
+
+1.
+Within stack.py, create a Stack class.
+
+Define an __init__() method for Stack. Inside the method, set an instance property top_item equal to None.
+
+class Stack:
+  def __init__(self):
+    self.top_item = None
+
+2.
+Below __init__(), define another method peek() that returns the value of the stack’s top_item using the Node method get_value().
+
+  def peek(self):
+    return self.top_item.get_value()
+
+-------------------------------------------------------------------------------------
+
+Stacks Python Push and Pop
+
+The stack’s push() and pop() methods are our tools to add and remove items from it. pop() additionally returns the value of the item it is removing. Keep in mind that we can only make modifications to the top of the stack.
+
+1.
+
+Below __init__(), define a method push() for Stack that takes the parameter value. Inside the method:
+
+Instantiate a Node with value as an argument and assign it to the variable item (because this item is a node, we have easy access to Node’s class methods)
+Set item‘s next node to the stack’s current top_item using the Node method set_next_node()
+Set the stack instance’s top_item equal to the new item, adding it to the top of the stack
+
+  def push(self, value):
+    item = Node(value)
+    item.set_next_node(self.top_item)
+    self.top_item = item
+
+2.
+Below push(), define a method pop() for Stack. Inside pop():
+
+Create a variable item_to_remove and set it equal to the stack’s top_item
+If we’re removing our stack’s top_item, we need to set a new top_item! Set the top_item equal to the node after item_to_remove
+Return the value stored in item_to_remove
+
+  def pop(self):
+    item_to_remove = self.top_item
+    self.top_item = item_to_remove.get_next_node()
+    return item_to_remove.get_value()
+
+----------------------------------------
+
+Stacks Python Size I
+
+With stacks, size matters. If we’re not careful, we can accidentally over-fill them with data. Since we don’t want any stack overflow, we need to go back and make a few modifications to our methods that help us track and limit the stack size so we can keep our stacks healthy.
+
+What do we do if someone tries to peek() or pop() when our stack is empty?
+
+How do we keep someone from push()ing to a stack that has already reached its limit?
+
+How do we even know how large our stack has gotten?
+
+1.
+In __init__(), let’s add two new properties: size and limit.
+
+limit should be accepted as a parameter with a default of 1000. Inside the method, set the instance limit property to the passed in value of limit.
+
+size should be set to 0 in __init__().
+
+  def __init__(self, limit=1000):
+    self.top_item = None
+    self.limit = limit
+    self.size = 0
+
+2.
+In peek() and pop(), wrap the current body of each method in an if clause that checks if the size of the stack is greater than 0.
+
+At the end of each method, outside the if clause, add an else clause with a print statement to let users know that the stack is empty.
+
+3.
+In pop() just before the return statement, reduce the size of the stack by 1.
+
+class Stack:
+  def __init__(self, limit=1000):
+    self.top_item = None
+    self.limit = limit
+    self.size = 0
+  
+  def push(self, value):
+    item = Node(value)
+    item.set_next_node(self.top_item)
+    self.top_item = item
+
+  def pop(self):
+    if self.size > 0:
+      item_to_remove = self.top_item
+      self.top_item = item_to_remove.get_next_node()
+    # Decrement the stack size here:
+      self.size -= 1
+      return item_to_remove.get_value()
+    else:
+      print("This stack is totally empty.")
+  def peek(self):
+    if self.size > 0:
+      return self.top_item.get_value()
+    else:
+      print("Nothing to see here!")
+
+--------------------------------------------------
+Stacks Python Size II
+
+It’s time to add a couple helper methods.
+
+Helper methods simplify the code we’ve written by abstracting and labeling chunks of code into a new function. Here’s an example:
+
+# Adding "!" without a helper
+saying = "I love helper methods"
+exclamation = saying + "!"
+
+# Adding "!" with a helper
+def add_exclamation_to_string(str):
+  return str + "!"
+
+exclamation2 = add_exclamation_to_string("I love helper methods")
+
+This might seem like a silly example, but think about the benefit of the add_exclamation_to_string() helper.
+
+The name tells us what this function does. Without a helper, we’d need to read the code to understand its meaning.
+The function lets us repeat this behavior. Without a helper, we’d need to keep rewriting the same code!
+First, we want one that checks if our stack has room for more items. We can use this in .push() to guard against pushing items to our stack when it’s full.
+
+Second, it’s helpful to have a method that checks if the stack is empty…
+
+1.
+Define a new method .has_space() in Stack. The method should return True if self.limit is greater than self.size.
+
+  def has_space(self):
+    return self.limit > self.size
+
+2.
+Go back to your .push() method — we need to make sure we’re keeping track of our stack size when we add new items. At the end of your method body, increment self.size by 1.
+
+self.size += 1
+
+3.
+Now add an if clause at the top of .push() that checks if your stack has space (using your newly created helper method).
+
+If there’s space, the rest of the body of the method should execute.
+If there’s no space, we want to print a message letting users know that the stack is already full. Something like “All out of space!” should be good.
+
+ def push(self, value):
+    if self.has_space():
+      item = Node(value)
+      item.set_next_node(self.top_item)
+      self.top_item = item
+    # Increment stack size by 1 here:
+      self.size += 1
+    else:
+      print("All out of space!")
+
+4.
+Finally, let’s define a new method .is_empty() in Stack.
+
+The method should return True if the stack’s size is 0.
+
+Anywhere we’ve written if self.size > 0: can now be replaced with if not self.is_empty().
+
+class Stack:
+  def __init__(self, limit=1000):
+    self.top_item = None
+    self.size = 0
+    self.limit = limit
+  
+  def push(self, value):
+    if self.has_space():
+      item = Node(value)
+      item.set_next_node(self.top_item)
+      self.top_item = item
+    # Increment stack size by 1 here:
+      self.size += 1
+    else:
+      print("All out of space!")
+    
+
+  def pop(self):
+    if not self.is_empty():
+      item_to_remove = self.top_item
+      self.top_item = item_to_remove.get_next_node()
+      self.size -= 1
+      return item_to_remove.get_value()
+    else:
+      print("This stack is totally empty.")
+  
+  def peek(self):
+    if not self.is_empty():
+	    return self.top_item.get_value()
+    else:
+      print("Nothing to see here!")
+      
+  # Define has_space() and is_empty() below:
+  def has_space(self):
+    return self.limit > self.size
+  def is_empty(self):
+    return self.size == 0
+
+Review:
+
+from node import Node
+
+class Stack:
+  def __init__(self, limit=1000):
+    self.top_item = None
+    self.size = 0
+    self.limit = limit
+  
+  def push(self, value):
+    if self.has_space():
+      item = Node(value)
+      item.set_next_node(self.top_item)
+      self.top_item = item
+      self.size += 1
+      print("Adding {} to the pizza stack!".format(value))
+    else:
+      print("No room for {}!".format(value))
+
+  def pop(self):
+    if not self.is_empty():
+      item_to_remove = self.top_item
+      self.top_item = item_to_remove.get_next_node()
+      self.size -= 1
+      print("Delivering " + item_to_remove.get_value())
+      return item_to_remove.get_value()
+    print("All out of pizza.")
+
+  def peek(self):
+    if not self.is_empty():
+      return self.top_item.get_value()
+    print("Nothing to see here!")
+
+  def has_space(self):
+    return self.limit > self.size
+
+  def is_empty(self):
+    return self.size == 0
+  
+# Defining an empty pizza stack
+pizza_stack = Stack(6)
+# Adding pizzas as they are ready until we have 
+pizza_stack.push("pizza #1")
+pizza_stack.push("pizza #2")
+pizza_stack.push("pizza #3")
+pizza_stack.push("pizza #4")
+pizza_stack.push("pizza #5")
+pizza_stack.push("pizza #6")
+
+# Uncomment the push() statement below:
+pizza_stack.push("pizza #7")
+
+# Delivering pizzas from the top of the stack down
+print("The first pizza to deliver is " + pizza_stack.peek())
+pizza_stack.pop()
+pizza_stack.pop()
+pizza_stack.pop()
+pizza_stack.pop()
+pizza_stack.pop()
+pizza_stack.pop()
+
+# Uncomment the pop() statement below:
+pizza_stack.pop()
+
+Output:
+Adding pizza #1 to the pizza stack!
+Adding pizza #2 to the pizza stack!
+Adding pizza #3 to the pizza stack!
+Adding pizza #4 to the pizza stack!
+Adding pizza #5 to the pizza stack!
+Adding pizza #6 to the pizza stack!
+No room for pizza #7!
+The first pizza to deliver is pizza #6
+Delivering pizza #6
+Delivering pizza #5
+Delivering pizza #4
+Delivering pizza #3
+Delivering pizza #2
+Delivering pizza #1
+All out of pizza.
+
+
+
