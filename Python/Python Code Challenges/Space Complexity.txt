@@ -1,0 +1,807 @@
+Space Complexity
+
+We use asymptotic notation to describe the runtime of a program. The three types of asymptotic notation are big Theta, big Omega, and big O.
+
+We use big Theta (Θ) to describe the runtime if the runtime of the program is the same in every case.
+
+The different common runtimes from fastest to slowest are: Θ(1), Θ(log N), Θ(N), Θ(N log N), Θ(N2), Θ(2N), Θ(N!).
+
+We use big Omega (Ω) to describe the best-case running time of a program.
+
+We use big O (O) to describe the worst-case running time of a program.
+
+Space Complexity
+
+Asymptotic notation is often used to describe the runtime of a program or algorithm, but it can also be used to describe the space, or memory, that a program or algorithm will need.
+
+Think about a simple function that takes in two numbers and returns their sum:
+
+def add_numbers(a, b):
+  return a + b
+
+This function has a space complexity of O(1), because the amount of space it needs will not change based on the input. While this function also has a constant runtime of O(1), most functions do not have matching space and time complexities.
+
+Let’s take a look at another function:
+
+def simple_loop(input_array):
+  for i in input_array:
+    print(i)
+
+As we know, a simple for loop that goes through every element in an array of size n has a linear runtime of O(n). However, this function takes O(1) space since no new variables are being created and therefore no more space must be allocated.
+
+A recursive function that is passed the same array or object in each call doesn’t add to the space complexity if the array or object is passed by reference (which it is in Python).
+
+Like with time complexity, space complexity denotes space growth in relation to the input size. It’s also important to note that space complexity usually refers to any additional space that will be needed, and doesn’t count the space of the input. So a function could have 10 arrays passed into it, but if all it does inside is print 'Hello World!', then it still takes O(1) space.
+
+
+Consider the double_array() and find_min() functions. Both have big O runtimes of O(n), but what are their space complexities?
+
+Code:
+def double_array(input_array):
+  # Returns an array that is the double of the input array
+  length = len(input_array)
+  doubled_array = [0] * length
+  for i in range(length):
+    doubled_array[i] = input_array[i] * 2
+  return doubled_array
+
+
+def find_min(input_array):
+  # Returns the smallest element in the array
+  minimum = input_array[0]
+  for i in input_array:
+    if i < minimum:
+      minimum = i
+  return minimum
+
+double_array() has a space complexity of 0(n) and find_min() has a space complexity of 0(1)
+
+double_array() creates a new array that matches the size of the input array, so the space needed for this function will change as the size of the input array changes. find_min() only creates one new variable regardless of the input, so its size is constant.
+
+
+Space complexity is important to consider alongside time complexity when comparing data structures and algorithms. While two functions may have very similar runtimes, one could use less space. Consider the double_array() function from above. It has a runtime of O(n), and takes O(n) space. Could we optimize it to have a better space complexity?
+
+def double_in_place(input_array):
+  length = len(input_array)
+  for i in range(length):
+    input_array[i] *= 2
+  return input_array
+
+double_in_place() does the same thing as double_array() and in the same amount of time, but only takes O(1) space, simply because it doesn’t create a new array. As you move forward, remember that just because a program has the best runtime possible, doesn’t mean it can’t still be optimized.
+
+----------------------------------
+Analyzing Runtime:
+
+When analyzing the runtime of a function, it’s necessary to check the number of iterations the loop will perform based on the size of the input.
+
+The count function on the right takes in a positive integer of size N and returns the number of times it takes to divide N by 2 until N reaches 1.
+
+We can analyze the runtime of this function by counting the number of iterations the while loop will perform based on the size of the input.
+
+Code:
+
+def count(N):
+  count = 0
+  while N > 1:
+    N = N//2
+    count += 1
+  return count
+
+
+num_iterations_1 = -1 #REPLACE
+print("The while loop performs {0} iterations when N is 1".format(num_iterations_1))
+
+num_iterations_2 = -1 #REPLACE
+print("\nThe while loop performs {0} iterations when N is 2".format(num_iterations_2))
+
+num_iterations_4 = -1 #REPLACE
+print("\nThe while loop performs {0} iterations when N is 4".format(num_iterations_4))
+
+num_iterations_32 = -1 #REPLACE
+print("\nThe while loop performs {0} iterations when N is 32".format(num_iterations_32))
+
+num_iterations_64 = -1 #REPLACE
+print("\nThe while loop performs {0} iterations when N is 64".format(num_iterations_64))
+
+runtime = "REPLACE"
+print("\nThe runtime for this function is O({0})".format(runtime))
+
+
+1.
+Change the values of num_iterations_1, num_iterations_2, num_iterations_4, num_iterations_32, and num_iterations_64 to the number of iterations the while loop will perform when N is respectively 1, 2, 4, 32, and 64.
+
+num_iterations_1 = 0 #REPLACE
+print("The while loop performs {0} iterations when N is 1".format(num_iterations_1))
+
+num_iterations_2 = 1 #REPLACE
+print("\nThe while loop performs {0} iterations when N is 2".format(num_iterations_2))
+
+num_iterations_4 = 2 #REPLACE
+print("\nThe while loop performs {0} iterations when N is 4".format(num_iterations_4))
+
+num_iterations_32 = 5 #REPLACE
+print("\nThe while loop performs {0} iterations when N is 32".format(num_iterations_32))
+
+num_iterations_64 = 6 #REPLACE
+print("\nThe while loop performs {0} iterations when N is 64".format(num_iterations_64))
+
+runtime = "REPLACE"
+print("\nThe runtime for this function is O({0})".format(runtime))
+
+2.
+
+Do you notice a pattern forming? With N being divided by 2 each iteration, we can use that to establish a big O runtime.
+
+Change the value of runtime to whichever one of these values you think the big O runtime is:
+
+"1"
+"N"
+"log N"
+"N log N"
+"N^2"
+"2^N"
+"N!"
+
+runtime = "log N"
+print("\nThe runtime for this function is O({0})".format(runtime))
+
+-------------------------------
+
+Finding the Maximum Value in a Linked List
+
+We often search through data structures to find a specific value. In this exercise, you will write a function to find the maximum value of a linked list and you will also analyze the runtime of your function.
+
+The function, find_max, takes in linked_list as an input. The function should return the maximum value in the linked list.
+
+script.py:
+
+from linkedlist import LinkedList
+
+#Fill in Function
+def find_max(linked_list):
+  print("--------------------------")
+  print("Finding the maximum value of:\n{0}".format(linked_list.stringify_list()))
+  #Write Code Here
+  
+  
+  
+
+#Test Cases
+ll = LinkedList(6)
+ll.insert_beginning(32)
+ll.insert_beginning(-12)
+ll.insert_beginning(48)
+ll.insert_beginning(2)
+ll.insert_beginning(1)
+print("The maximum value in this linked list is {0}\n".format(find_max(ll)))
+
+ll_2 = LinkedList(60)
+ll_2.insert_beginning(12)
+ll_2.insert_beginning(22)
+ll_2.insert_beginning(-10)
+print("The maximum value in this linked list is {0}\n".format(find_max(ll_2)))
+
+ll_3 = LinkedList("A")
+ll_3.insert_beginning("X")
+ll_3.insert_beginning("V")
+ll_3.insert_beginning("L")
+ll_3.insert_beginning("D")
+ll_3.insert_beginning("Q")
+print("The maximum value in this linked list is {0}\n".format(find_max(ll_3)))
+
+#Runtime
+runtime = "Replace"
+print("The runtime of find_max is O({0})".format(runtime))
+
+linkedlist.py:
+
+from node import Node
+
+class LinkedList:
+  def __init__(self, value=None):
+    self.head_node = Node(value)
+  
+  def get_head_node(self):
+    return self.head_node
+  
+  def insert_beginning(self, new_value):
+    new_node = Node(new_value)
+    new_node.set_next_node(self.head_node)
+    self.head_node = new_node
+    
+  def stringify_list(self):
+    string_list = ""
+    current_node = self.head_node
+    while current_node:
+      string_list += str(current_node.value) + "\n"
+      current_node = current_node.get_next_node()
+    return string_list
+  
+  def remove_node(self, value_to_remove):
+    current_node = self.head_node
+    if current_node.get_value() == value_to_remove:
+      self.head_node = current_node.get_next_node()
+    else:
+      while current_node:
+        next_node = current_node.get_next_node()
+        if next_node.get_value() == value_to_remove:
+          current_node.next_node = next_node.get_next_node()
+          current_node = None
+        else:
+          current_node = next_node
+
+node.py:
+
+class Node:
+  def __init__(self, value, next_node=None):
+    self.value = value
+    self.next_node = next_node
+    
+  def set_next_node(self, next_node):
+    self.next_node = next_node
+    
+  def get_next_node(self):
+    return self.next_node
+  
+  def get_value(self):
+    return self.value
+
+1.
+Fill in the find_max function such that you return the maximum value in linked_list by only traversing the linked_list once.
+
+#Fill in Function
+def find_max(linked_list):
+  print("--------------------------")
+  print("Finding the maximum value of:\n{0}".format(linked_list.stringify_list()))
+  current = linked_list.get_head_node()
+  maximum = current.get_value()
+  while current.get_next_node():
+      current = current.get_next_node()
+      val = current.get_value()
+      if val > maximum:
+        maximum = val
+  return maximum
+
+2.
+
+If you only traversed the list once to find the maximum value, what would be the big O runtime of the find_max function?
+
+Scroll to the bottom of the code and change the value of runtime to whichever one of these values you think the big O runtime is:
+
+If we are traversing the entire linked_list to find the maximum value, then this implies a runtime of N.
+
+-----------------------------------
+
+Sort a Linked List
+
+We also often sort 
+data structures
+Preview: Docs Loading link description
+ in order to organize the values stored in them. In this exercise, you will sort a linked list from smallest value to largest value.
+
+To sort a linked list, we can do the following:
+
+1.Instantiate a new linked list
+2.Find the maximum value of our inputted linked list
+3.Insert the maximum to the beginning of the new linked list
+4.Remove the maximum value from the inputted linked list
+5.Repeat steps 2-4 until the head node of the inputted linked list points to None
+6.Return the new linked list
+
+script.py:
+
+from linkedlist import LinkedList
+
+def find_max(linked_list):
+  current = linked_list.get_head_node()
+  maximum = current.get_value()
+  while current.get_next_node():
+    current = current.get_next_node()
+    val = current.get_value()
+    if val > maximum:
+      maximum = val
+  return maximum
+
+#Fill in Function
+def sort_linked_list(linked_list):
+  print("\n---------------------------")
+  print("The original linked list is:\n{0}".format(linked_list.stringify_list()))
+  new_linked_list = LinkedList()
+  #Write Code Here!
+  
+  return new_linked_list
+
+  
+
+#Test Cases
+ll = LinkedList("Z")
+ll.insert_beginning("C")
+ll.insert_beginning("Q")
+ll.insert_beginning("A")
+print("The sorted linked list is:\n{0}".format(sort_linked_list(ll).stringify_list()))
+
+ll_2 = LinkedList(1)
+ll_2.insert_beginning(4)
+ll_2.insert_beginning(18)
+ll_2.insert_beginning(2)
+ll_2.insert_beginning(3)
+ll_2.insert_beginning(7)
+print("The sorted linked list is:\n{0}".format(sort_linked_list(ll_2).stringify_list()))
+
+ll_3 = LinkedList(-11)
+ll_3.insert_beginning(44)
+ll_3.insert_beginning(118)
+ll_3.insert_beginning(1000)
+ll_3.insert_beginning(23)
+ll_3.insert_beginning(-92)
+print("The sorted linked list is:\n{0}".format(sort_linked_list(ll_3).stringify_list()))
+
+#Runtime
+runtime = "REPLACE"
+print("The runtime of sort_linked_list is O({0})\n\n".format(runtime))
+
+linkedlist.py:
+from node import Node
+
+class LinkedList:
+  def __init__(self, value=None):
+    self.head_node = Node(value)
+  
+  def get_head_node(self):
+    return self.head_node
+  
+  def insert_beginning(self, new_value):
+    new_node = Node(new_value)
+    new_node.set_next_node(self.head_node)
+    self.head_node = new_node
+    
+  def stringify_list(self):
+    string_list = ""
+    current_node = self.head_node
+    while current_node:
+      if current_node.value != None:
+      	string_list += str(current_node.value) + "\n"
+      current_node = current_node.get_next_node()
+    return string_list
+  
+  def remove_node(self, value_to_remove):
+    current_node = self.head_node
+    if current_node.get_value() == value_to_remove:
+      self.head_node = current_node.get_next_node()
+    else:
+      while current_node:
+        next_node = current_node.get_next_node()
+        if next_node.get_value() == value_to_remove:
+          current_node.next_node = next_node.get_next_node()
+          current_node = None
+        else:
+          current_node = next_node
+
+node.py:
+class Node:
+  def __init__(self, value, next_node=None):
+    self.value = value
+    self.next_node = next_node
+    
+  def set_next_node(self, next_node):
+    self.next_node = next_node
+    
+  def get_next_node(self):
+    return self.next_node
+  
+  def get_value(self):
+    return self.value
+
+
+
+1.
+Fill in the sort_linked_list function such that you return a new linked list that is sorted from smallest value to largest value. Step 1 and Step 6 have been completed for you.
+
+Use the methods in linkedlist.py and node.py to traverse, remove, and get values from the list.
+
+#Fill in Function
+def sort_linked_list(linked_list):
+  print("\n---------------------------")
+  print("The original linked list is:\n{0}".format(linked_list.stringify_list()))
+  new_linked_list = LinkedList()
+  while linked_list.get_head_node():
+    current_max = find_max(linked_list)
+    linked_list.remove_node(current_max)
+    new_linked_list.insert_beginning(current_max)
+
+2.
+Using the steps described in the narrative to write your sort function, what would be the big O runtime of the function? We will learn how to sort data structures with faster runtimes in future courses.
+
+Scroll to the bottom of the code and change the value of runtime to whichever one of these values you think the big O runtime of sort_linked_list is:
+
+#Runtime
+runtime = "N^2"
+
+Notice that within your loop in the sort function, you call find_max which takes O(N) time.
+
+If you call find_max N times, then the sort function has a runtime of O(N*N) or O(N2).
+
+-----------------------------------------
+
+Stacks vs. Queues Runtime
+
+In addition to analyzing the 
+runtime
+Preview: Docs Runtime is the period of time during which a program is running.
+ of various 
+data structures
+Preview: Docs Loading link description
+, it is also important to compare the runtime of different data structures.
+
+In this exercise, we will compare the runtime of retrieving the first value added to a queue to the runtime of retrieving the first value added to a stack.
+
+Kirby Zachariah loves to travel! She’s been to six different countries and often forgets the order in which she visited them. However, knowing she has a bad memory, she decided to keep track of the countries she’s visited in both a Queue and a Stack.
+
+script.py:
+from stack import Stack
+from queue import Queue
+
+N = 6
+
+my_stack = Stack(N)
+my_stack.push("Australia")
+my_stack.push("India")
+my_stack.push("Costa Rica")
+my_stack.push("Peru")
+my_stack.push("Ghana")
+my_stack.push("Indonesia")
+
+my_queue = Queue(N)
+my_queue.enqueue("Australia")
+my_queue.enqueue("India")
+my_queue.enqueue("Costa Rica")
+my_queue.enqueue("Peru")
+my_queue.enqueue("Ghana")
+my_queue.enqueue("Indonesia")
+
+#Print the first values in the stack and queue
+print("The top value in my stack is: {0}".format(my_stack.peek()))
+print("The front value of my queue is: {0}".format(my_queue.peek()))
+
+#Get First Value added to Queue
+first_value_added_to_queue = "REPLACE" #Checkpoint 2
+print("\nThe first value enqueued to the queue was {0}".format(first_value_added_to_queue))
+queue_runtime = "REPLACE" #Checkpoint 3
+print("The runtime of getting the front of the queue is O({0})".format(queue_runtime))
+
+#Get First Value added to Stack
+#Write Code Here for #Checkpoint 4
+first_value_added_to_stack = "REPLACE"
+print("\nThe first value pushed onto the stack was {0}".format(first_value_added_to_stack))
+stack_runtime = "REPLACE" #Checkpoint 5
+print("The runtime of getting the bottom of the stack is O({0})".format(stack_runtime))
+
+
+stack.py:
+from node import Node
+
+class Stack:
+  def __init__(self, limit=1000):
+    self.top_item = None
+    self.size = 0
+    self.limit = limit
+  
+  def push(self, value):
+    if self.has_space():
+      item = Node(value)
+      item.set_next_node(self.top_item)
+      self.top_item = item
+      self.size += 1
+    else:
+      print("No room for {}!".format(value))
+
+  def pop(self):
+    if self.size > 0:
+      item_to_remove = self.top_item
+      self.top_item = item_to_remove.get_next_node()
+      self.size -= 1
+      return item_to_remove.get_value()
+    print("All out of room.")
+
+  def peek(self):
+    if self.size > 0:
+      return self.top_item.get_value()
+    print("Nothing to see here!")
+
+  def has_space(self):
+    return self.limit > self.size
+
+  def is_empty(self):
+    return self.size == 0
+
+queue.py:
+from node import Node
+
+class Queue:
+  def __init__(self, max_size=None):
+    self.head = None
+    self.tail = None
+    self.max_size = max_size
+    self.size = 0
+    
+  def enqueue(self, value):
+    if self.has_space():
+      item_to_add = Node(value)
+      if self.is_empty():
+        self.head = item_to_add
+        self.tail = item_to_add
+      else:
+        self.tail.set_next_node(item_to_add)
+        self.tail = item_to_add
+      self.size += 1
+    else:
+      print("Sorry, no more room!")
+         
+  def dequeue(self):
+    if self.get_size() > 0:
+      item_to_remove = self.head
+      if self.get_size() == 1:
+        self.head = None
+        self.tail = None
+      else:
+        self.head = self.head.get_next_node()
+      self.size -= 1
+      return item_to_remove.get_value()
+    else:
+      print("The queue is totally empty!")
+  
+  def peek(self):
+    if self.size > 0:
+      return self.head.get_value()
+    else:
+      print("Nothing in the queue!")
+  
+  def get_size(self):
+    return self.size
+  
+  def has_space(self):
+    if self.max_size == None:
+      return True
+    else:
+      return self.max_size > self.get_size()
+    
+  def is_empty(self):
+    return self.size == 0
+
+
+1.
+Run the code to see what the value at the front of the queue is and what the value at the top of the stack is.
+
+Output:
+
+Output-only Terminal
+Output:
+The top value in my stack is: Indonesia
+The front value of my queue is: Australia
+
+The first value enqueued to the queue was REPLACE
+The runtime of getting the front of the queue is O(REPLACE)
+
+The first value pushed onto the stack was REPLACE
+The runtime of getting the bottom of the stack is O(REPLACE)
+
+2.
+Change the value of first_value_added_to_queue to the first value added to my_queue. DO NOT simply write "Australia". Use the queue methods to extract the first value. It is ok to remove values from the queue.
+
+first_value_added_to_queue = my_queue.dequeue()
+
+3.
+Given that N is the size of the initial queue, change the value of queue_runtime to the big O runtime of getting the first value added to the queue.
+
+The size of the queue has no impact on the retrieval of the first value added to the queue. What runtime would that imply?
+
+queue_runtime = "1" 
+
+4.
+Change the value of first_value_added_to_stack to the first value pushed onto my_stack. DO NOT simply write "Australia". Use the stack methods to extract the first value. It is ok to remove values from the stack.
+
+#Get First Value added to Stack
+while not my_stack.is_empty():
+  first_value_added_to_stack = my_stack.pop()
+
+5.
+Given that N is the size of the initial stack, change the value of stack_runtime to the big O runtime of getting the first value pushed onto the stack.
+
+Since we have to pop all the values in the stack to get to the first value added, that implies a linear runtime.
+
+stack_runtime = "N" 
+
+-------------------------------
+
+HashMaps vs. Linked Lists Runtime
+
+Dr. Shah is a busy surgeon. He sees so many different patients every day that it’s often hard to keep track which patients have which diseases. He decided to store this data in some of the cool 
+data structures
+Preview: Docs Systems for organizing data that dictate how items relate to one another, are accessed, and modified.
+ he learned about. However, because he never learnt asymptotic notation, he didn’t know which data structure would be the fastest. He decided to store his patient data in both a HashMap and a Linked List.
+
+In the HashMap, he stored the values as key value pairs where the patient’s name is the key and the respective patient’s disease is the value.
+
+In the Linked List, he made each node a list of two values: the first value is the patient’s name and the second value is the patient’s disease.
+
+In this exercise, you will select patient data from both the HashMap and Linked List and compare which one is faster.
+
+script.py:
+from hashmap import HashMap
+from linkedlist import LinkedList
+
+N = 6
+
+#Insert Data Into HashMap
+my_hashmap = HashMap(N)
+my_hashmap.assign("Zachary", "Sunburn Sickness")
+my_hashmap.assign("Elise", "Severe Nausea")
+my_hashmap.assign("Mimi", "Stomach Flu")
+my_hashmap.assign("Devan", "Malaria")
+my_hashmap.assign("Gary", "Bacterial Meningitis")
+my_hashmap.assign("Neeknaz", "Broken Cheekbone")
+
+#Insert Data into LinkedList
+my_linked_list = LinkedList(["Zachary", "Sunburn Sickness"])
+my_linked_list.insert_beginning(["Elise", "Severe Nausea"])
+my_linked_list.insert_beginning(["Mimi", "Stomach Flu"])
+my_linked_list.insert_beginning(["Devan", "Malaria"])
+my_linked_list.insert_beginning(["Gary", "Bacterial Meningitis"])
+my_linked_list.insert_beginning(["Neeknaz", "Broken Cheekbone"])
+
+#Get Zachary's Disease from a HashMap
+hashmap_zachary_disease = "REPLACE" #Checkpoint 1
+print("Zachary's disease is {0}".format(hashmap_zachary_disease))
+hashmap_runtime = "REPLACE" #Checkpoint 2
+print("The runtime of retrieving a value from a hashmap is O({0})\n\n".format(hashmap_runtime))
+
+
+#Get Zachary's Disease from a Linked List
+#Write Code here for Checkpoint 3
+linked_list_zachary_disease = "REPLACE"
+print("Zachary's disease is {0}".format(linked_list_zachary_disease))
+linked_list_runtime = "REPLACE" #Checkpoint 4
+print("The runtime of retrieving the first value added to a linked list is O({0})\n\n".format(linked_list_runtime))
+
+linkedlist.py:
+
+from node import Node
+
+class LinkedList:
+  def __init__(self, value=None):
+    self.head_node = Node(value)
+  
+  def get_head_node(self):
+    return self.head_node
+  
+  def insert_beginning(self, new_value):
+    new_node = Node(new_value)
+    new_node.set_next_node(self.head_node)
+    self.head_node = new_node
+    
+  def stringify_list(self):
+    string_list = ""
+    current_node = self.head_node
+    while current_node:
+      string_list += str(current_node.value) + "\n"
+      current_node = current_node.get_next_node()
+    return string_list
+  
+  def remove_node(self, value_to_remove):
+    current_node = self.head_node
+    if current_node.get_value() == value_to_remove:
+      self.head_node = current_node.get_next_node()
+    else:
+      while current_node:
+        next_node = current_node.get_next_node()
+        if next_node.get_value() == value_to_remove:
+          current_node.next_node = next_node.get_next_node()
+          current_node = None
+        else:
+          current_node = next_node
+
+
+hashmap.py:
+class HashMap:
+  def __init__(self, array_size):
+    self.array_size = array_size
+    self.array = [None for item in range(array_size)]
+
+  def hash(self, key, count_collisions=0):
+    key_bytes = key.encode()
+    hash_code = sum(key_bytes)
+    return hash_code + count_collisions
+
+  def compressor(self, hash_code):
+    return hash_code % self.array_size
+
+  def assign(self, key, value):
+    array_index = self.compressor(self.hash(key))
+    current_array_value = self.array[array_index]
+
+    if current_array_value is None:
+      self.array[array_index] = [key, value]
+      return
+
+    if current_array_value[0] == key:
+      self.array[array_index] = [key, value]
+      return
+
+    # Collision!
+
+    number_collisions = 1
+
+    while(current_array_value[0] != key):
+      new_hash_code = self.hash(key, number_collisions)
+      new_array_index = self.compressor(new_hash_code)
+      current_array_value = self.array[new_array_index]
+
+      if current_array_value is None:
+        self.array[new_array_index] = [key, value]
+        return
+
+      if current_array_value[0] == key:
+        self.array[new_array_index] = [key, value]
+        return
+
+      number_collisions += 1
+
+    return
+
+  def retrieve(self, key):
+    array_index = self.compressor(self.hash(key))
+    possible_return_value = self.array[array_index]
+
+    if possible_return_value is None:
+      return None
+
+    if possible_return_value[0] == key:
+      return possible_return_value[1]
+
+    retrieval_collisions = 1
+
+    while (possible_return_value != key):
+      new_hash_code = self.hash(key, retrieval_collisions)
+      retrieving_array_index = self.compressor(new_hash_code)
+      possible_return_value = self.array[retrieving_array_index]
+
+      if possible_return_value is None:
+        return None
+
+      if possible_return_value[0] == key:
+        return possible_return_value[1]
+
+      retrieval_collisions += 1
+
+    return
+
+1.
+Change the value of hashmap_zachary_disease to Zachary’s disease according to the HashMap. DO NOT simply write "Sunburn Sickness". Use the HashMap methods to extract the value.
+
+hashmap_zachary_disease = my_hashmap.retrieve("Zachary")
+
+2.
+Given that N is the size of the HashMap, change the value of hashmap_runtime to the big O runtime of getting a value from a HashMap.
+
+The size of the hashmap has no impact on the retrieval of values from the hashmap. What runtime would that imply?
+
+hashmap_runtime = "1"
+
+3.
+Change the value of linked_list_zachary_disease to Zachary’s disease according to the Linked List. DO NOT simply write "Sunburn Sickness". Write code that uses the Linked List and Node methods to extract the value.
+
+#Get Zachary's Disease from a Linked List
+traverse = my_linked_list.get_head_node()
+while traverse.get_value()[0] != "Zachary":
+  traverse = traverse.get_next_node()
+linked_list_zachary_disease = traverse.get_value()[1]
+
+4.
+Given that N is the amount of Nodes in the Linked List, change the value of linked_list_runtime to the big O runtime of getting the first value added to the Linked List.
+
+Since we have to traverse the entire linked list to get to the first value added, that implies a linear runtime.
+
+linked_list_runtime = "N"
+
+--------------------------------
+
